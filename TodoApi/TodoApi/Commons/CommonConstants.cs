@@ -11,7 +11,7 @@ public static class CommonConstants
     public static class TodoStatus
     {
         public const string Pending = "Pending";
-        public const string InProgress = "InProgress";
+        public const string InProgress = "In Progress";
         public const string Completed = "Completed";
     }
     

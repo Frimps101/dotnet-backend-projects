@@ -23,6 +23,8 @@ public class Program
         services.AddScoped<ITodoRepository, TodoRepository>();
         services.AddScoped<ITodoService, TodoService>();
 
+        services.AddMemoryCache();
+
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

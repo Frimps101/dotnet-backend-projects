@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Swashbuckle.AspNetCore.Annotations;
 using TodoApi.Commons.Models;
 using TodoApi.Dtos;
@@ -12,9 +13,11 @@ namespace TodoApi.Controllers;
 public class TodoController:ControllerBase
 {
     private readonly ITodoService _todoService;
-    public TodoController(ITodoService todoService)
+    private readonly IMemoryCache _memoryCache;
+    public TodoController(ITodoService todoService, IMemoryCache memoryCache)
     {
         _todoService = todoService;
+        _memoryCache = memoryCache;
     }
     
     /// <summary>
@@ -44,7 +47,17 @@ public class TodoController:ControllerBase
     [SwaggerOperation(nameof(FilterTodos), OperationId = nameof(FilterTodos))]
     public async Task<IActionResult> FilterTodos([FromQuery] TodosFilter filter)
     {
+        if(_memoryCache.TryGetValue("allTodos", out var cachedResult))
+        {
+            return Ok(cachedResult);
+        }
+        
         var result = await _todoService.FilterTodos(filter);
+        
+        var cacheEntryOptions = new MemoryCacheEntryOptions()
+            .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+        _memoryCache.Set("allTodos", result, cacheEntryOptions);
+        
         return StatusCode(result.Code, result);
     }
     
@@ -83,7 +96,7 @@ public class TodoController:ControllerBase
     /// param id
     /// </summary>
     /// <returns></returns>
-    [HttpPost("{id}/delete-todo")]
+    [HttpDelete("{id}/delete-todo")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Todo>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse<Todo>))]
     [SwaggerOperation(nameof(DeleteTodo), OperationId = nameof(DeleteTodo))]

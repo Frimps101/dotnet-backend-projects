@@ -49,12 +49,12 @@ public class TodoRepository : ITodoRepository
         
         if (!string.IsNullOrEmpty(filter.Status))
         {
-            query = query.Where(x => x.Status.ToLower().Contains(filter.Status));
+            query = query.Where(x => x.Status.ToLower().Contains(filter.Status.ToLower()));
         }
         
         if (!string.IsNullOrEmpty(filter.Priority))
         {
-            query = query.Where(x => x.Priority.ToLower().Contains(filter.Priority));
+            query = query.Where(x => x.Priority.ToLower().Contains(filter.Priority.ToLower()));
         }
         
         if (filter.Deadline != DateTime.MinValue)
