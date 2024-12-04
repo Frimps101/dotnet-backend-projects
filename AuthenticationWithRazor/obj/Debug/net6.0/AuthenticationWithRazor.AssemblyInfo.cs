@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthenticationWithRazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3d0a9268dfad8f9efa7a94cc3e537ad9e3824e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuthenticationWithRazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthenticationWithRazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
