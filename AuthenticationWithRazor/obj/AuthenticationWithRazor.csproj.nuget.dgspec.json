@@ -13,6 +13,7 @@
         "packagesPath": "/Users/macbook/.nuget/packages/",
         "outputPath": "/Users/macbook/FusionHub/Personal/dotnet-backend-projects/AuthenticationWithRazor/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
