@@ -11,6 +11,7 @@ public class TodoApiDbContext:DbContext
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+        
     }
     
     public DbSet<Todo> Todos => Set<Todo>();
@@ -21,5 +22,10 @@ public class TodoApiDbContext:DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.Roles)
+            .WithMany(r => r.Users)
+            .UsingEntity(j => j.ToTable("UserRoles"));
     }
 }
