@@ -60,6 +60,12 @@ public class UserRepository:IUserRepository
         return user;
     }
 
+    public async Task<User?> GetUserByEmail(string email)
+    {
+        var user = await GetUsers().FirstOrDefaultAsync(user => email.Equals(user.Email));
+        return user;
+    }
+
     public async Task<int> UpdateUser(User user)
     {
         _dbContext.Users.Update(user);
