@@ -1,5 +1,7 @@
 using AuthenticationWithRazor.Data;
+using AuthenticationWithRazor.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace AuthenticationWithRazor;
 
@@ -17,8 +19,13 @@ public class Program
         {
             options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));
         });
+        
+        builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+            .AddEntityFrameworkStores<AuthDbContext>();
 
         var app = builder.Build();
+        
+        
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -33,6 +40,7 @@ public class Program
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapRazorPages();
