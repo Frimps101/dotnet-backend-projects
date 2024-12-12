@@ -45,6 +45,7 @@ public class TodoController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Todo>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse<Todo>))]
     [SwaggerOperation(nameof(FilterTodos), OperationId = nameof(FilterTodos))]
+    [LimitRequestsAttribute(MaxRequests = 2, TimeWindow = 5)]
     public async Task<IActionResult> FilterTodos([FromQuery] TodosFilter filter)
     {
         if(_memoryCache.TryGetValue("allTodos", out var cachedResult))
@@ -70,6 +71,7 @@ public class TodoController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Todo>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse<Todo>))]
     [SwaggerOperation(nameof(GetTodoById), OperationId = nameof(GetTodoById))]
+    [LimitRequestsAttribute(MaxRequests = 2, TimeWindow = 5)]
     public async Task<IActionResult> GetTodoById([FromRoute] string id)
     {
         var result = await _todoService.GetTodoById(id);
