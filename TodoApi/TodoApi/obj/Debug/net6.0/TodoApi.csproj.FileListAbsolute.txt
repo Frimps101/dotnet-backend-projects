@@ -49,3 +49,4 @@
 /Users/macbook/FusionHub/Personal/dotnet-backend-projects/TodoApi/TodoApi/obj/Debug/net6.0/TodoApi.genruntimeconfig.cache
 /Users/macbook/FusionHub/Personal/dotnet-backend-projects/TodoApi/TodoApi/obj/Debug/net6.0/ref/TodoApi.dll
 /Users/macbook/FusionHub/Personal/dotnet-backend-projects/TodoApi/TodoApi/obj/Debug/net6.0/TodoApi.csproj.CopyComplete
+/Users/macbook/FusionHub/Personal/dotnet-backend-projects/TodoApi/TodoApi/bin/Debug/net6.0/AspNetCoreRateLimit.dll

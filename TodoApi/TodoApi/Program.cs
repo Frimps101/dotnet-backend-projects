@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Data;
 using TodoApi.Repositories.Implementations;
@@ -29,6 +30,11 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        builder.Services.AddMemoryCache();
+        builder.Services.AddInMemoryRateLimiting();
+        builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+        builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
         var app = builder.Build();
 
@@ -43,7 +49,9 @@ public class Program
 
         app.UseAuthorization();
 
-
+        app.UseIpRateLimiting();
+        //app.UseMiddleware<CustomRateLimitMiddleware>();
+        
         app.MapControllers();
 
         app.Run();
