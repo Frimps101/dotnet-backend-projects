@@ -21,6 +21,7 @@ public class Program
         });
         
         builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AuthDbContext>();
 
         var app = builder.Build();
